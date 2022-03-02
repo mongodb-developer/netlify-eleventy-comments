@@ -3,7 +3,8 @@ const axios = require("axios");
 
 module.exports = async function () {
 
-    const url = `https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comments`;
+    // const url = `https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comments`;
+    const url = `${process.env.URL}/.netlify/functions/get_comments`;
 
     let asset = new AssetCache("comments");
 

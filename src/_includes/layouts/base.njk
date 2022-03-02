@@ -27,7 +27,8 @@
             let encodedLastBuilt = encodeURIComponent("{{ config.lastBuildDate }}");
 
             function getCommentsForArticle() {
-                fetch(`https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comments?url=${encodedPageUrl}&last_built=${encodedLastBuilt}`)
+                {# fetch(`https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comments?url=${encodedPageUrl}&last_built=${encodedLastBuilt}`) #}
+                fetch(`/.netlify/functions/get_comments?url=${encodedPageUrl}&last_built=${encodedLastBuilt}`)
                 .then(response => response.json())
                 .then(response => {
                     response.forEach(comment => {
@@ -55,7 +56,8 @@
                 parentTag.appendChild(usernameTag);
                 parentTag.appendChild(commentTag);
                 document.getElementById("comments").appendChild(parentTag);
-                fetch("https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comment", {
+                {# fetch("https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comment", { #}
+                fetch("/.netlify/functions/create_comment", {
                     "method": "POST",
                     "body": JSON.stringify({
                         "username": username,

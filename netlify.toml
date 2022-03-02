@@ -4,3 +4,6 @@
 
 [context.production.environment]
     NODE_VERSION = "17.0.1"
+
+[functions]
+    directory = "functions/"
