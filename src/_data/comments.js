@@ -1,5 +1,6 @@
 const { AssetCache } = require("@11ty/eleventy-cache-assets");
 const axios = require("axios");
+const commentPreloader = require("../../functions/get_comments/get_comments").handler;
 
 module.exports = async function () {
 
@@ -13,12 +14,15 @@ module.exports = async function () {
     }
 
     try {
-        const response = await axios({
-            "method": "GET",
-            "url": url
-        });
-        await asset.save(response.data, "json");
-        return response.data;
+        // const response = await axios({
+        //     "method": "GET",
+        //     "url": url
+        // });
+        // await asset.save(response.data, "json");
+        // return response.data;
+        const response = await commentPreloader({ queryStringParameters: {} }).then(response => JSON.parse(response.body));
+        await asset.save(response, "json");
+        return response;
     } catch (error) {
         console.error(error);
         return null;

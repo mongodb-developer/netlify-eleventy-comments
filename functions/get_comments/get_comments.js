@@ -3,8 +3,6 @@ const axios = require("axios");
 const handler = async (event) => {
     try {
         
-        console.log("MADE IT HERE");
-
         const commentFilter = {};
 
         if (event.queryStringParameters.hasOwnProperty("url")) {
@@ -16,8 +14,6 @@ const handler = async (event) => {
                 "$gt": new Date(decodeURIComponent(event.queryStringParameters.last_built))
             }
         }
-
-        console.log(commentFilter);
 
         const response = await axios({
             "method": "POST",

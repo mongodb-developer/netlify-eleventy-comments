@@ -7,7 +7,7 @@
             <h2>Comments</h2>
             <div id="comments">
                 {% for comment in (comments | getCommentsForUrl(page.url)) %}
-                    <div id="comment-{{ comment._id }}">
+                    <div id="comment-{{ comment._id }}" style="padding: 10px 0">
                         <div>{{ comment.username }}</div>
                         <div>{{ comment.comment }}</div>
                     </div>
@@ -15,9 +15,9 @@
             </div>
         </div>
         <div style="padding: 10px 0">
-            <input id="comment_username" name="comment_username" hint="username" value="nic" />
+            <input id="comment_username" name="comment_username" hint="username" value="" />
             <br />
-            <textarea id="comment_text" name="comment_text" hint="comment">test comment</textarea>
+            <textarea id="comment_text" name="comment_text" hint="comment"></textarea>
             <br />
             <button onclick="createNewComment()">Create Comment</button>
         </div>
@@ -39,6 +39,7 @@
                         commentTag.innerHTML = comment.comment;
                         parentTag.appendChild(usernameTag);
                         parentTag.appendChild(commentTag);
+                        parentTag.style.padding = "10px 0";
                         document.getElementById("comments").appendChild(parentTag);
                     })
                 })
@@ -55,6 +56,7 @@
                 commentTag.innerHTML = comment;
                 parentTag.appendChild(usernameTag);
                 parentTag.appendChild(commentTag);
+                parentTag.style.padding = "10px 0";
                 document.getElementById("comments").appendChild(parentTag);
                 {# fetch("https://us-east-1.aws.data.mongodb-api.com/app/netlify-examples-bjlqp/endpoint/comment", { #}
                 fetch("/.netlify/functions/create_comment", {
@@ -67,7 +69,6 @@
                 })
                 .then(response => response.json())
                 .then(response => {
-                    console.log(response);
                     document.getElementById("comment_username").value = "";
                     document.getElementById("comment_text").value = "";
                 });
